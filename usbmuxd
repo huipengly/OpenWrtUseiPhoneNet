@@ -1,5 +1,4 @@
 #!/bin/sh /etc/rc.common
-# Copyright (c) 2011-2012 OpenWrt.org
 START=99
 
 stop() {
@@ -7,9 +6,10 @@ stop() {
 }
 
 start() {
-    if [ ! -d "/var/lib/lockdown" ];then
-        mkdir -p /var/lib/lockdown
-    fi
+    /usr/sbin/usbmuxd
+}
 
-    ./usr/sbin/usbmuxd &
+restart() {
+    killall usbmuxd
+    /usr/sbin/usbmuxd
 }
